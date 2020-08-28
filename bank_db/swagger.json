@@ -1,0 +1,592 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "This is bank server api",
+    "version": "1.0.0",
+    "title": "ABC BANK",
+    "contact": {
+      "email": "bankabclimited123@gmail.com"
+    }
+  },
+  "basePath": "",
+  "securityDefinitions": {
+    "Bearer": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
+    }
+  },
+  "host": "localhost:3000/bank",
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/create": {
+      "post": {
+        "tags": [
+          "New User"
+        ],
+        "summary": "Adds a new user to the bank",
+        "description": "This operation adds a new user to the bank and creates a account for them",
+        "operationId": "addUser",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "customer registration",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "userName": {
+                  "type": "string",
+                  "description": "userName of the user",
+                  "example": "adhitya"
+                },
+                "password": {
+                  "type": "string",
+                  "description": "password for the user",
+                  "example": "adhitya99"
+                },
+                "emailAddress": {
+                  "type": "string",
+                  "description": "emailAddress of the user",
+                  "example": "adhityaganesh49@gmail.com"
+                },
+                "phoneNo": {
+                  "type": "integer",
+                  "description": "phone no of the user",
+                  "example": 86667706259
+                },
+                "dateOfBirth": {
+                  "type": "string",
+                  "description": "dob of the  user",
+                  "example": "09061999"
+                },
+                "balance": {
+                  "type": "integer",
+                  "description": "starting balance of the user",
+                  "example": 800
+                },
+                "atmPin": {
+                  "type": "integer",
+                  "description": "adds the atmPin for the user",
+                  "example": 4000
+                },
+                "subjectText": {
+                  "type": "string",
+                  "description": "adds the subject for the mail",
+                  "example": "ABC ALERT"
+                },
+                "messagebody": {
+                  "type": "string",
+                  "description": "adds the message body fot the mail",
+                  "example": "welcome user"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "SUCCESS"
+                },
+                "message": {
+                  "type": "string",
+                  "example": "account created successfully"
+                },
+                "data": {
+                  "type": "string",
+                  "example":""
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "failure",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "FAILURE"
+                },
+                "message": {
+                  "type": "string",
+                  "example": "sorry,cannot create account"
+                },
+                "data": {
+                  "type": "string",
+                  "example":""
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/login": {
+      "post": {
+        "tags": [
+          "login"
+        ],
+        "summary": "Using it to login",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "customer login",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "userInput": {
+                  "type": "string",
+                  "description": "userName of the user",
+                  "example": "adhitya"
+                },
+                "password": {
+                  "type": "string",
+                  "description": "password for the user",
+                  "example": "adhitya99"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "SUCCESS"
+                },
+                "message": {
+                  "type": "string",
+                  "example": "login successful"
+                },
+                "data": {
+                  "type": "string",
+                  "example":"token Value"
+                }
+              }
+            }
+          },
+          "405": {
+            "description":"failure",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "FAILURE"
+                },
+                "message": {
+                  "type": "string",
+                  "example": "sorry,unable to login"
+                },
+                "data": {
+                  "type": "string",
+                  "example":""
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/display": {
+      "get": {
+        "tags": [
+          "bank features"
+        ],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "summary": "allows the customer to access his/her account",
+        "description": "allows for displaying the bank balance",
+        "parameters": [
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "SUCCESS"
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Your account has a current balance of 4000.All the transactions will be updated within a week"
+                },
+                "data": {
+                  "type": "string",
+                  "example":""
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "failure",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "FAILURE"
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Sorry,the requested operation could be performed"
+                },
+                "data": {
+                  "type": "string",
+                  "example":""
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/deposit/{amount}": {
+      "get": {
+        "tags": [
+          "bank features"
+        ],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "summary": "allows the customer to deposit money to his/her bank details",
+        "description": "allows the customer to save money into his/her account",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "amount",
+            "required": true,
+            "type": "string"
+          }],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "status": {
+                    "type": "string",
+                    "example": "SUCCESS"
+                  },
+                  "message": {
+                    "type": "string",
+                    "example": "200 has been credited to your account"
+                  },
+                  "data": {
+                    "type": "string",
+                    "example":""
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "failure",
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "status": {
+                    "type": "string",
+                    "example": "FAILURE"
+                  },
+                  "message": {
+                    "type": "string",
+                    "example": "Sorry,the requested operation could be performed"
+                  },
+                  "data": {
+                    "type": "string",
+                    "example":""
+                  }
+                }
+              }
+            }
+          }
+      }
+    },
+    "/withDraw/{amount}": {
+      "get": {
+        "tags": [
+          "bank features"
+        ],
+        "summary": "allows the customer to withdraw from the bank account",
+        "description": "allows the customer to take money from the existing account",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "amount",
+            "in": "path",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "SUCCESS"
+                },
+                "message": {
+                  "type": "string",
+                  "example": "200 has been withdrawn to your account"
+                },
+                "data": {
+                  "type": "string",
+                  "example":""
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "failure",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "FAILURE"
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Sorry,the requested operation could be performed"
+                },
+                "data": {
+                  "type": "string",
+                  "example":""
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/transactionHistory":{
+      "get": {
+        "tags": [
+          "bank features"
+        ],
+        "summary": "allows the customer to display the history from the bank account",
+        "description": "allows the customer to view all the history of his/her transactions",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "SUCCESS"
+                },
+                "message": {
+                  "type": "string",
+                  "example": "history obtained"
+                },
+                "data": {
+                  "type": "array",
+                  "example":""
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "failure",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "FAILURE"
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Sorry,the requested operation could be performed"
+                },
+                "data": {
+                  "type": "string",
+                  "example":""
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/editDetails":{
+      "put":{
+        "tags":[
+          "bank features"
+        ], "summary": "allows the customer to withdraw from the bank account",
+        "description": "allows the customer to take money from the existing account",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters":[{
+          "in": "body",
+          "name": "customer detailEdit",
+          "schema": {
+            "type": "object",
+            "properties": {
+              "id":{
+                "type":"string",
+                "description":"field to be changed",
+                "example":"userName"
+              },
+              "idValue":{
+                "type":"string",
+                "description":"value of the field",
+                "example":"adhityag"
+              }
+            }
+          }}
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "SUCCESS"
+                },
+                "message": {
+                  "type": "string",
+                  "example": "details updated successfully"
+                },
+                "data": {
+                  "type": "string",
+                  "example":""
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "failure",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "FAILURE"
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Sorry,the requested operation could be performed"
+                },
+                "data": {
+                  "type": "string",
+                  "example":""
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/deleteAccount":{
+      "delete":{
+        "tags":[
+          "bank features"
+        ], "summary": "allows the customer to delete the bank account",
+        "description": "allows the customer to delete the existing account",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters":[{
+          "in": "body",
+          "name": "customer deleteAccount",
+          "schema": {
+            "type": "object",
+            "properties": {
+              "queryId": {
+                "type": "string",
+                "description": "userName of the user",
+                "example": "adhitya"
+              },
+              "queryValue": {
+                "type": "string",
+                "description": "password for the user",
+                "example": "adhitya99"
+              }
+            }
+          }}
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "SUCCESS"
+                },
+                "message": {
+                  "type": "string",
+                  "example": "account deleted successfully"
+                },
+                "data": {
+                  "type": "string",
+                  "example":""
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "failure",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "FAILURE"
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Sorry,the requested operation could be performed"
+                },
+                "data": {
+                  "type": "string",
+                  "example":""
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

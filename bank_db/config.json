@@ -1,0 +1,9 @@
+{"mailCredentials":{
+    "userName":"bankabclimited123@gmail.com",
+    "password":"Banklimited123",
+    "from":"bankabclimited123@gmail.com"
+},
+"twilioCredentials":{
+    "accountSid":"AC4daf612df1b70c5aafc7b86fd632bee7",
+    "authToken":"0c5881621480bd07b30f4d7e39b9765c"
+}}
