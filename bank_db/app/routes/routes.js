@@ -1,20 +1,8 @@
-import express from 'express';
+const express = require("express");
 const router=express.Router();
-import shopController from '../controllers/shoppingController'
+const shopController = require('../controllers/mainController');
 
-let controller=new shopController();
-
-router.post('/create',controller.accountCreate);
-
-router.post('/login',controller.accountLogin)
-
-router.post('/encrypt',controller.encryptionAlgorithm);
-
-router.post('/verify',controller.verification);
-
-router.post('/qrcode',controller.qrVerification);
-
-router.post('/paypal',controller.razorPay);
+router.use("/shop",shopController);
 
 
 module.exports=router;

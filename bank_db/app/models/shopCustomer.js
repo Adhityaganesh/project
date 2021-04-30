@@ -1,4 +1,5 @@
-import mongoose from 'mongoose'
+const mongoose = require('mongoose');
+
 const bankHistory=mongoose.Schema({
     unique_id:Number,
     accountNo:String,

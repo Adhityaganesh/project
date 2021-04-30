@@ -1,4 +1,5 @@
-import mongoose from 'mongoose'
+const mongoose = require('mongoose');
+
 const shopSchema = mongoose.Schema({
     unique_id:Number,
     userName:String,

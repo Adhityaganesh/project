@@ -1,8 +1,7 @@
-import nodeMailer from 'nodemailer';
-import {createLogger,transports} from 'winston';
-import jwt from 'jsonwebtoken';
-
-global.jwt=jwt;
+const nodeMailer = require('nodemailer');
+const {createLogger,transports} = require('winston');
+const jwt = require('jsonwebtoken');
+let token;
 
 module.exports = {
     mailSender: (userName, password, fromEmail, toEmail, subjectText, mailText) => {
@@ -40,13 +39,12 @@ module.exports = {
         ]
     }),
     jwtSign: (data) => {
-        jwt.sign({ data }, "secretkey", { expiresIn: "50m" }, (err, token) => {
-            if (err) {
-                module.exports.jwtErr = err;
-            } else {
-
-                module.exports.jwtRes = token;
-            }
-        });
+        token = jwt.sign({data},"secretkey",{expiresIn:"50m"});
+        return token;
+    },
+    jwtVerify : (data) => {
+        console.log(data);
+        let value = jwt.verify(data,"secretkey");
+        return value;
     }
 }
